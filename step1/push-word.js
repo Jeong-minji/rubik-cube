@@ -5,8 +5,8 @@ let input_arr = user_input.split(" ");
 
 let word = input_arr[0];
 let direction = input_arr[2];
-let count;
 let calc =  Math.abs(input_arr[1]) % word.length;
+let count;
 
 if(input_arr[1] < 0) {
     count =  word.length - calc;
