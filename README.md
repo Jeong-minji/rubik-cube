@@ -1,3 +1,4 @@
+# Rubik Cube
 Submit code for Codesquad Test
 
 ## Step1. 단어 밀어내기
