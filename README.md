@@ -4,7 +4,7 @@ Submit code for Codesquad test
 
 ## Step1. 단어 밀어내기
 
-[동작 방법]
+### [동작 방법]
 
 1. 단어, 정수(-100 <= N <= 100), L/R 을 prompt로 입력받음
    -> 입력받은 문자열을 배열에 저장
