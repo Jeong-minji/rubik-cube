@@ -1,21 +1,24 @@
 let arr = [['R', 'R', 'W'], ['G', 'C', 'W'], ['G', 'B', 'B']];
-const result = document.querySelector(".result");
+const input = document.getElementById("input");
+const btn_submit = document.getElementById("btn_submit");
+const result = document.getElementById("result");
 
 const showResult = (arr) => {
-  let a = document.createElement("div");
+  let div = document.createElement("div");
   let answer = "";
   for(let i = 0; i < arr.length; i++) {
     for(let j = 0; j < arr[i].length; j++) {
       answer += arr[i][j] + " ";
     }
-    answer += "</br>";
+    if(arr[i+1] == "'") {
+      continue;
+    } else {
+      answer += "</br>";
+    }
   }
-  a.innerHTML = answer;
-  result.appendChild(a);
+  div.innerHTML = answer;
+  result.appendChild(div);
 }
-
-let user = prompt("CUBE >");
-let user_arr = user.split("");
 
 const topLeft = () => {
   let temp = arr[0][0];
@@ -85,36 +88,56 @@ const leftDown = () => {
   return arr;
 }
 
-const init = () => {
-  showResult(arr);
+showResult(arr);
+let user_arr = "";
+let pattern_char = /[URLBQ']/;
 
+btn_submit.addEventListener("click", function() {
+  user_arr = (input.value).split("");
+  
   for(let i = 0; i < user_arr.length; i++) {
-    console.log(user_arr[i]);
+    
+
+    if(!pattern_char.test(user_arr[i])) {
+      alert("You can use U, R, L, B, Q");
+    }
 
     if(user_arr[i] == "U") {
-      showResult(topLeft(arr));
-    } else if(user_arr[i] == "U'") {
-      showResult(topRight(arr));
+      if(user_arr[i + 1] == "'") {
+        showResult(user_arr[i]+"'");
+        showResult(topRight(arr));
+      } else {
+        showResult(user_arr[i]);
+        showResult(topLeft(arr));
+      }
     } else if(user_arr[i] == "R") {
-      showResult(rightUp(arr));
-    } else if(user_arr[i] == "R'") {
-      showResult(rightDown(arr));
+      if(user_arr[i + 1] == "'") {
+        showResult(user_arr[i]+"'");
+        showResult(rightDown(arr));
+      } else {
+        showResult(user_arr[i]);
+        showResult(rightUp(arr));
+      }
     } else if(user_arr[i] == "L") {
-      showResult(leftDown(arr));
-    } else if(user_arr[i] == "L'") {
-      showResult(leftUp(arr));
+      if(user_arr[i + 1] == "'") {
+        showResult(user_arr[i]+"'");
+        showResult(leftUp(arr));
+      } else {
+        showResult(user_arr[i]);
+        showResult(leftDown(arr));
+      }
     } else if(user_arr[i] == "B") {
-      showResult(bottomRight(arr));
-    } else if(user_arr[i] == "B'") {
-      showResult(bottomLeft(arr));
+      if(user_arr[i + 1] == "'") {
+        showResult(user_arr[i]+"'");
+        showResult(bottomLeft(arr));
+      } else {
+        showResult(user_arr[i]);
+        showResult(bottomRight(arr));
+      }
     } else if(user_arr[i] == "Q") {
-      console.log("bye~");
+      alert("Bye~");
       break;
-    } else {
-      alert("you can't use " + user_arr[i]);
-      break;
-    }
+    } 
   }
-}
-
-init();
+  input.value = "";
+});
